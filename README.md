@@ -21,3 +21,16 @@ Where I use `{YOURORG}`, you'll replace with the organization that you create.
 #### Create New Organization
 * Open https://dev.azure.com
 * Create a new organization 
+
+![AzDevops1](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps1.png)
+
+![AzDevops2](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps2.png)
+
+#### Create Project
+* Create the first project - name it `AzBootCamp2019`
+
+#### Authorize your Azure Cloud subscription
+* Add a service connection for your Azure Subscription 
+![AzDevops3](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps3.png)
+
+
