@@ -9,8 +9,8 @@ resource "azurerm_app_service_plan" "test" {
   resource_group_name = "${azurerm_resource_group.test.name}"
 
   sku {
-    tier = "Basic"
-    size = "B1"
+    tier = "Standard"
+    size = "S1"
   }
 }
 
