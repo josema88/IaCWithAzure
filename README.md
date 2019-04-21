@@ -46,9 +46,44 @@ After you create your organization and project within Azure Devops you can proce
 ![AzDevops7](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps7.png)
 ![AzDevops8](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps8.png)
 
-#### Create Terraform Backend Task
+#### Select a Ubuntu OS Agent
+For this sample you should use an agent that runs with Ubuntu OS since the scripts are written in bash.
+![AzDevops18](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps18.png)
+
+#### Create Pipeline variables
+These pipeline variables will be used in order to parametrize names for some resources and avoid the hardcoding withing the scripts.
+![AzDevops11](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps11.png)
+
+#### Add Task - Create Terraform Backend 
 Select the Azure CLI task. Select the Azure subscription from the drop-down list and click Authorize to configure Azure service connection. Get your automation script from the repo. Note that the bash script will receive some arguments.
 ![AzDevops9](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps9.png)
 ![AzDevops10](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps10.png)
 
+Also some environment variables should be added, these env variables should take the values from the Pipeline variables previously created.
+![AzDevops12](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps12.png)
+
+
 By default, Terraform stores state locally in a file named terraform.tfstate. When working with Terraform in a team, use of a local file makes Terraform usage complicated. With remote state, Terraform writes the state data to a remote data store. Here we are using Azure CLI task to create Azure storage account and storage container to store Terraform state. For more information on Terraform remote state click [here](https://www.terraform.io/docs/state/remote.html)
+
+#### Add Task - Get Storage Account Key
+Select the Azure CLI Task. Select the Azure subscription from the drop-down list. Get your automation script from the repo.
+![AzDevops13](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps13.png)
+
+To configure the Terraform backend we need Storage account access key. Here we are using Azure PowerShell task to get the Access key of the storage account provisioned in the previous step.
+
+### Add Task - Terraform Init
+First you should install the extension in order to use the terraform task, select the extension created by Charles Zipp.
+![AzDevops14](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps14.png)
+![AzDevops15](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps15.png)
+![AzDevops16](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps16.png)
+
+Once the extension is installed in your Azure DevOps you can add the task for Terraform Install, this task will guarantee that the agent that runs the command has Terraform installed. 
+![AzDevops17](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps17.png)
+![AzDevops17_1](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps17_1.png)
+
+Select the Terraform CLI task. Select Azure service connection from the drop-down.
+![AzDevops17](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps17.png)
+
+This task runs terraform init command. The terraform init command looks through all of the *.tf files in the current working directory and automatically downloads any of the providers required for them. In this example, it will download Azure provider as we are going to deploy Azure resources. For more information about terraform init command click here
+
+
