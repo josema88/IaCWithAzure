@@ -7,5 +7,3 @@ MULTILINE=$(az storage account keys list \
     --resource-group $TERRAFORM_RG | jq '.[0].value')
 
 echo "##vso[task.setvariable variable=StorageKey;]${MULTILINE}"
-
-export ARM_ACCESS_KEY=${MULTILINE}
