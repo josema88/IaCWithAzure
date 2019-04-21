@@ -2,4 +2,8 @@
 
 # This script will fetch storage key which is required in terraform file to authenticate backend storage account
 
-az storage account keys list -g MyResourceGroup -n MyStorageAccount
+MULTILINE=$(az storage account keys list \
+    --account-name $TERRAFORM_SA \
+    --resource-group $TERRAFORM_RG | jq '.[0].value')
+
+echo "##vso[task.setvariable variable=StorageKey;]${MULTILINE}"
