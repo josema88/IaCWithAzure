@@ -2,6 +2,7 @@ provider "azurerm" {
   version = "1.1.1"
 }
 
+# Create Resource Group
 resource "azurerm_resource_group" "myterraformgroup" {
   name     = "testResourceGroup"
   location = "centralus"
