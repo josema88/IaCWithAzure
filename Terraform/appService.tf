@@ -1,10 +1,10 @@
 resource "azurerm_resource_group" "test" {
-  name     = "example-resources"
+  name     = "AzureBootCamp19Rg"
   location = "eastus2"
 }
 
 resource "azurerm_app_service_plan" "test" {
-  name                = "example-appserviceplan"
+  name                = "azbc2019-appserviceplan"
   location            = "${azurerm_resource_group.test.location}"
   resource_group_name = "${azurerm_resource_group.test.name}"
 
@@ -15,7 +15,7 @@ resource "azurerm_app_service_plan" "test" {
 }
 
 resource "azurerm_app_service" "test" {
-  name                = "example-app-service"
+  name                = "azbc2019-app-service"
   location            = "${azurerm_resource_group.test.location}"
   resource_group_name = "${azurerm_resource_group.test.name}"
   app_service_plan_id = "${azurerm_app_service_plan.test.id}"
