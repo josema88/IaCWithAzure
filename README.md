@@ -2,12 +2,14 @@
 
 This is a sample that allows to create infrastructure in Azure cloud using IaC concept with tools such as Terraform and Azure DevOps.
 
-On this project you will be able to create a PaS Azure Resource called [App Service] https://azure.microsoft.com/en-us/services/app-service/ . This Azure resource will allow to you to deploy your web app, for this sample a .net web app. 
+On this project you will be able to create a PaS Azure Resource called [App Service](https://azure.microsoft.com/en-us/services/app-service/). This Azure resource will allow to you to deploy your web app, for this sample a .net web app. 
 
 # Requirements
 
   * Install [Azure CLI](https://docs.bitnami.com/azure/faq/administration/install-az-cli/)
   * Install [Terraform](https://learn.hashicorp.com/terraform/getting-started/install.html)
+  * Create an Azure account.
+  * Create an Azure DevOps account.
 
 
 # Create Azure DevOps Project
@@ -51,22 +53,9 @@ For this sample you should use an agent that runs with Ubuntu OS since the scrip
 These pipeline variables will be used in order to parametrize names for some resources and avoid the hardcoding withing the scripts.
 ![AzDevops11](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps11.png)
 
-#### Add Task - Create Terraform Backend 
-Select the Azure CLI task. Select the Azure subscription from the drop-down list and click Authorize to configure Azure service connection. Get your automation script from the repo. Note that the bash script will receive some arguments.
-![AzDevops9](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps9.png)
-![AzDevops10](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps10.png)
+### Terraform Backend 
 
-Also some environment variables should be added, these env variables should take the values from the Pipeline variables previously created.
-![AzDevops12](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps12.png)
-
-
-By default, Terraform stores state locally in a file named terraform.tfstate. When working with Terraform in a team, use of a local file makes Terraform usage complicated. With remote state, Terraform writes the state data to a remote data store. Here we are using Azure CLI task to create Azure storage account and storage container to store Terraform state. For more information on Terraform remote state click [here](https://www.terraform.io/docs/state/remote.html)
-
-#### Add Task - Get Storage Account Key
-Select the Azure CLI Task. Select the Azure subscription from the drop-down list. Get your automation script from the repo.
-![AzDevops13](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps13.png)
-
-To configure the Terraform backend we need Storage account access key. Here we are using Azure PowerShell task to get the Access key of the storage account provisioned in the previous step.
+By default, Terraform stores state locally in a file named terraform.tfstate. When working with Terraform in a team, use of a local file makes Terraform usage complicated. With remote state, Terraform writes the state data to a remote data store. For this sample we will use a Terraform CLI task that allows to create an Azure storage account and storage container to store Terraform state if this not exists yet. For more information on Terraform remote state click [here](https://www.terraform.io/docs/state/remote.html)
 
 ### Add Task - Terraform Init
 First you should install the extension in order to use the terraform task, select the extension created by Charles Zipp.
@@ -78,9 +67,23 @@ Once the extension is installed in your Azure DevOps you can add the task for Te
 ![AzDevops17](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps17.png)
 ![AzDevops17_1](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps17_1.png)
 
-Select the Terraform CLI task. Select Azure service connection from the drop-down.
-![AzDevops17](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps17.png)
+Add Terraform CLI task to perform the Init Stage, you should select the command Init and for the Configuration directory you should point to the artifact configured before (repo and folder that contains the terraform files).
+![AzDevops20](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps20.png)
+![AzDevops21](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps21.png)
 
-This task runs terraform init command. The terraform init command looks through all of the *.tf files in the current working directory and automatically downloads any of the providers required for them. In this example, it will download Azure provider as we are going to deploy Azure resources. For more information about terraform init command click here
+Configure the Azure Resource Manager section in order to set the Terraform Backend that will be located in azure, we should use the Pipeline variables configured previously.
+![AzDevops22](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps22.png)
 
+This task runs terraform init command. The terraform init command looks through all of the *.tf files in the current working directory and automatically downloads any of the providers required for them. In this example, it will download Azure provider as we are going to deploy Azure resources. For more information about terraform init command click [here](https://www.terraform.io/docs/commands/init.html).
 
+### Add Task - Terraform Plan
+Add Terraform CLI task like the init task, but for this one you should select the command Plan. You should set the Configuration Directory like the previous task. Also set the "Environment Azure Subscription" that should point to your Azure service connection configured before, you should authorize the connection if necessary. 
+![AzDevops23](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps23.png)
+
+The terraform plan command is used to create an executi]on plan. Terraform determines what actions are necessary to achieve the desired state specified in the configuration files. This is a dry run and shows which actions will be made. For more information about terraform plan command click [here](https://www.terraform.io/docs/commands/plan.html).
+
+### Add Task - Terraform Apply
+Add Terraform CLI task like previous tasks, but for this one you should select the command Apply. You should set the Configuration Directory like the previous task. Also set the "Environment Azure Subscription" that should point to your Azure service connection configured before.
+![AzDevops24](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps24.png)
+
+This task will run the terraform apply command to deploy the resources to Azure Cloud.
