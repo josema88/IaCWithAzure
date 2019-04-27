@@ -4,6 +4,14 @@ This is a sample that allows to create infrastructure in Azure cloud using IaC c
 
 On this project you will be able to create a PaS Azure Resource called [App Service](https://azure.microsoft.com/en-us/services/app-service/). This Azure resource will allow to you to deploy your web app, for this sample a .net web app. 
 
+Within this repo is a folder called Terraform and a file called [appService.tf](https://github.com/josema88/IaCWithAzure/blob/master/Terraform/appService.tf) that contains the definition of the infrastructure that will be deployed on Azure. The file contains the definition for the following Azure resources:
+ * Resource Group
+ * App Service Plan
+ * App Service
+
+Each resource has its required configurations such as the name and other parameters.
+
+
 # Requirements
 
   * Install [Azure CLI](https://docs.bitnami.com/azure/faq/administration/install-az-cli/)
@@ -87,3 +95,26 @@ Add Terraform CLI task like previous tasks, but for this one you should select t
 ![AzDevops24](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps24.png)
 
 This task will run the terraform apply command to deploy the resources to Azure Cloud.
+
+### Save your Pipeline
+Once the pipeline configuration is completed set a Name on it and save changes.
+![AzDevops25](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps25.png)
+
+### Launch your Pipeline
+The Pipeline is now available to be selected and Create a Release, this action will start the execution of the pipeline and its tasks. 
+![AzDevops26](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps26.png)
+![AzDevops27](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps27.png)
+![AzDevops28](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps28.png)
+
+
+When the execution of the pipeline is finished you will be able the see the new infraestructure created in Azure.
+![AzDevops29](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps29.png)
+![AzDevops30](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps30.png)
+
+Within the RG for the App Service you will see the new infrastructure.
+![AzDevops31](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps31.png)
+
+
+Now a .net web app can be deployed to the new App Service.
+
+
