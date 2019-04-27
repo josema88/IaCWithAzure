@@ -9,7 +9,7 @@ Within this repo is a folder called Terraform and a file called [appService.tf](
  * App Service Plan
  * App Service
 
-Each resource has its required configurations such as the name and other parameters.
+Each resource has its required configurations such as the name and other parameters. If you use the terraform file from this repo you should change the name for your App Service resource since this should be a unique name within azure cloud.
 
 
 # Requirements
@@ -58,15 +58,15 @@ For this sample you should use an agent that runs with Ubuntu OS since the scrip
 ![AzDevops18](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps18.png)
 
 #### Create Pipeline variables
-These pipeline variables will be used in order to parametrize names for some resources and avoid the hardcoding withing the scripts.
+These pipeline variables will be used in order to parametrize names for some resources and avoid the hardcoding withing the scripts. These variables will be used to create the Azure resources that will store the Terraform Backend.
 ![AzDevops11](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps11.png)
 
 ### Terraform Backend 
-
 By default, Terraform stores state locally in a file named terraform.tfstate. When working with Terraform in a team, use of a local file makes Terraform usage complicated. With remote state, Terraform writes the state data to a remote data store. For this sample we will use a Terraform CLI task that allows to create an Azure storage account and storage container to store Terraform state if this not exists yet. For more information on Terraform remote state click [here](https://www.terraform.io/docs/state/remote.html)
 
 ### Terraform Cycle
 When running Terraform in automation, the focus is usually on the core plan/apply cycle. The main Terraform workflow is the following:
+
 ![TFcycle](https://github.com/josema88/IaCWithAzure/blob/master/Images/terraformworkflow.png)
 
 i. Initialize the Terraform working directory.
