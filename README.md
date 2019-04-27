@@ -1,15 +1,12 @@
 # IaCWithAzure
 
-This is a sample that allows to create infrastructure in Azure cloud using IaC concept with tools such as Terraform, Ansible and Azure Resource Manager.
+This is a sample that allows to create infrastructure in Azure cloud using IaC concept with tools such as Terraform and Azure DevOps.
 
-  - Type some Markdown on the left
-  - See HTML in the right
-  - Magic
+On this project you will be able to create a PaS Azure Resource called [App Service] https://azure.microsoft.com/en-us/services/app-service/ . This Azure resource will allow to you to deploy your web app, for this sample a .net web app. 
 
 # Requirements
 
   * Install [Azure CLI](https://docs.bitnami.com/azure/faq/administration/install-az-cli/)
-  * Install [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) 
   * Install [Terraform](https://learn.hashicorp.com/terraform/getting-started/install.html)
 
 
