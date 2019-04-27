@@ -65,6 +65,18 @@ These pipeline variables will be used in order to parametrize names for some res
 
 By default, Terraform stores state locally in a file named terraform.tfstate. When working with Terraform in a team, use of a local file makes Terraform usage complicated. With remote state, Terraform writes the state data to a remote data store. For this sample we will use a Terraform CLI task that allows to create an Azure storage account and storage container to store Terraform state if this not exists yet. For more information on Terraform remote state click [here](https://www.terraform.io/docs/state/remote.html)
 
+### Terraform Cycle
+When running Terraform in automation, the focus is usually on the core plan/apply cycle. The main Terraform workflow is the following:
+![TFcycle](https://github.com/josema88/IaCWithAzure/blob/master/Images/terraformworkflow.png)
+
+i. Initialize the Terraform working directory.
+
+ii. Produce a plan for changing resources to match the current configuration.
+
+iii. Apply the changes described by the plan.
+
+The following tasks will allow you to implement the terraform cycle.
+ 
 ### Add Task - Terraform Init
 First you should install the extension in order to use the terraform task, select the extension created by Charles Zipp.
 ![AzDevops14](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps14.png)
