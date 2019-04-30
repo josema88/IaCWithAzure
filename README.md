@@ -11,19 +11,17 @@ Within this repo is a folder called Terraform and a file called [appService.tf](
 
 Each resource has its required configurations such as the name and other parameters. If you use the terraform file from this repo you should change the name for your App Service resource since this should be a unique name within azure cloud.
 
-
 # Requirements
 
-  * Install [Azure CLI](https://docs.bitnami.com/azure/faq/administration/install-az-cli/)
-  * Install [Terraform](https://learn.hashicorp.com/terraform/getting-started/install.html)
-  * Create an Azure account.
+  * Install [Azure CLI](https://docs.bitnami.com/azure/faq/administration/install-az-cli/) (if you want to test from your computer)
+  * Install [Terraform](https://learn.hashicorp.com/terraform/getting-started/install.html) (if you want to test from your computer)
+  * Create an Azure account (.
   * Create an Azure DevOps account.
 
 
 # Create Azure DevOps Project
 
 You must create your Azure DevOps project that will contain the automated pipelines that deploy the infraestructure to the cloud.
-Where I use `{YOURORG}`, you'll replace with the organization that you create.
 
 #### Create New Organization
 * Open https://dev.azure.com
