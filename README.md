@@ -15,7 +15,7 @@ Each resource has its required configurations such as the name and other paramet
 
   * Install [Azure CLI](https://docs.bitnami.com/azure/faq/administration/install-az-cli/) (if you want to test from your computer)
   * Install [Terraform](https://learn.hashicorp.com/terraform/getting-started/install.html) (if you want to test from your computer)
-  * Create an Azure account (.
+  * Create an Azure account.
   * Create an Azure DevOps account.
 
 
