@@ -1,4 +1,4 @@
-# IaCWithAzure
+# Azure Infrastructure Deployment with Terraform (IAC) and automated with Azure DevOps
 
 This is a sample that allows to create infrastructure in Azure cloud using IaC concept with tools such as Terraform and Azure DevOps.
 
