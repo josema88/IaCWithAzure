@@ -56,7 +56,7 @@ For this sample you should use an agent that runs with Ubuntu OS since the scrip
 ![AzDevops18](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps18.png)
 
 #### Create Pipeline variables
-These pipeline variables will be used in order to parametrize names for some resources and avoid the hardcoding withing the scripts. These variables will be used to create the Azure resources that will store the Terraform Backend.
+These pipeline variables will be used in order to parametrize names for some resources and avoid the hardcoding withing the scripts. These variables will be used to create the Azure resources that will store the Terraform Backend. The variable "TerraformStorageAccount" refers to the name that you will set to the storage account in Azure that will stores the Terraform Backend, this variable should be different for any implementation since this should be a unique name within Azure Cloud.
 ![AzDevops11](https://github.com/josema88/IaCWithAzure/blob/master/Images/AzDevOps11.png)
 
 ### Terraform Backend 
